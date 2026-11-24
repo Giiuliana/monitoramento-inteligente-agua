@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "author": "Giuliana Dias",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    {
+      "type": "wokwi-hx711",
+      "id": "cell1",
+      "top": 185,
+      "left": -237.4,
+      "attrs": { "type": "5kg" }
+    },
+    {
+      "type": "wokwi-pushbutton-6mm",
+      "id": "btn1",
+      "top": 45.8,
+      "left": -76.8,
+      "attrs": { "color": "green", "xray": "1" }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": -36,
+      "left": -190.2,
+      "attrs": { "volume": "0.1" }
+    },
+    { "type": "wokwi-logic-analyzer", "id": "logic1", "top": 96.35, "left": 153.6, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "cell1:GND", "esp:GND.2", "black", [] ],
+    [ "cell1:DT", "esp:16", "gray", [] ],
+    [ "cell1:SCK", "esp:4", "green", [] ],
+    [ "cell1:VCC", "esp:5V", "red", [] ],
+    [ "btn1:1.l", "esp:14", "green", [] ],
+    [ "btn1:2.l", "esp:GND.2", "black", [] ],
+    [ "bz1:2", "esp:25", "red", [ "v0" ] ],
+    [ "bz1:1", "esp:GND.1", "black", [ "v0" ] ],
+    [ "logic1:D0", "esp:26", "gold", [ "h0" ] ],
+    [ "logic1:D1", "esp:25", "red", [ "h0" ] ],
+    [ "logic1:GND", "esp:GND.1", "gray", [ "h0" ] ]
+  ],
+  "dependencies": {}
+}
