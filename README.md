@@ -2,7 +2,7 @@
 
 Projeto acadêmico de Internet das Coisas (IoT) desenvolvido na Universidade Presbiteriana Mackenzie por Giuliana Dias Guimarães e André Luis de Oliveira. O protótipo estima a quantidade de água consumida e restante em uma garrafa a partir da variação de massa, emite um alerta sonoro de nível baixo e disponibiliza os dados remotamente por MQTT. A proposta está relacionada ao ODS 3 — Saúde e Bem-Estar.
 
-A implementação foi desenvolvida em C++ com o framework Arduino para ESP32 e validada no simulador Wokwi. Não foi realizada montagem física.
+A implementação foi desenvolvida em C++ com o framework Arduino para ESP32.
 
 ## Funcionalidades
 
@@ -36,7 +36,7 @@ O ESP32 integra o módulo Wi-Fi, sem necessidade de uma interface serial-USB int
 | Componente | Quantidade | Função |
 |---|---:|---|
 | ESP32-DevKitC V4 | 1 | Processamento e comunicação Wi-Fi |
-| Célula de carga de 5 kg + HX711 | 1 conjunto | Aquisição da massa (modelo integrado no Wokwi) |
+| Célula de carga de 5 kg + HX711 | 1 conjunto | Aquisição da massa |
 | Botão de pressão de 6 mm | 1 | Início de nova sessão |
 | Buzzer piezoelétrico virtual | 1 | Alerta sonoro |
 | Logic Analyzer virtual | 1 | Instrumentação dos ensaios do atuador |
@@ -62,10 +62,10 @@ O botão utiliza o pull-up interno do ESP32. A ligação direta do buzzer e a al
 ## Software e dependências
 
 - `sketch.ino`: firmware em C++ para o ESP32.
-- `diagram.json`: componentes e conexões do circuito Wokwi.
+- `diagram.json`: componentes e conexões do circuito.
 - `libraries.txt`: dependências da simulação.
 
-Bibliotecas utilizadas no Wokwi:
+Bibliotecas utilizadas:
 
 ```text
 HX711
@@ -84,16 +84,6 @@ A EspMQTTClientFork deriva da biblioteca EspMQTTClient e utiliza PubSubClient co
 | `onConnectionEstablished()` | Registrar a conexão e publicar o estado atual em caso de sessão ativa |
 
 O GPIO26 marca o instante imediatamente anterior ao comando `tone()` para os ensaios com analisador lógico.
-
-## Como reproduzir no Wokwi
-
-1. Acesse [Wokwi](https://wokwi.com/) e crie um projeto ESP32-DevKitC V4 com Arduino.
-2. Copie os arquivos `sketch.ino`, `diagram.json` e `libraries.txt` deste repositório para o projeto (após sua publicação).
-3. Deixe o controle de carga do HX711 no mínimo e inicie a simulação para executar a tara.
-4. Aguarde a confirmação da conexão MQTT no Serial Monitor.
-5. Ajuste a carga para aproximadamente 1.200 g e pressione o botão verde para iniciar uma sessão.
-6. Diminua a massa para simular o consumo e aguarde a estabilização; aumente a massa para simular o reabastecimento.
-7. Para testar o alerta, reduza a massa para aproximadamente 250 g. Aumente-a para aproximadamente 700 g para desligar o buzzer.
 
 ### Parâmetros de referência
 
